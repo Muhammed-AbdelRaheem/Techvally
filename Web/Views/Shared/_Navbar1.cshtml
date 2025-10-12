@@ -1,0 +1,42 @@
+﻿<header class="sticky-top">
+    <nav class="navbar navbar-expand-lg   sticky-top  navbar-light bg-white">
+        <div class="container">
+            <a asp-action="Index" class="navbar-brand">
+                <img class="logo" src="~/images/nm.jpg" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-black" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    
+                 
+
+                   <li class="nav-item">
+                        <a class="nav-link text-black" asp-area="Customer" asp-controller="Home" asp-action="PackagePage">Our Packages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" asp-area="Customer" asp-controller="Home" asp-action="FAQ">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" asp-area="Customer" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" asp-area="Customer" asp-controller="Home" asp-action="ContactUs">Contact Us </a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link text-black" href="tel:+971 50 255 9262"> <i class="fa-solid fa-phone"></i> +971 50 255 9262</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+</header>

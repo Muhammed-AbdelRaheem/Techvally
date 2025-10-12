@@ -1,0 +1,60 @@
+﻿@model HomePageVM
+@{
+    ViewData["Title"] = "CLIENTS";
+    ViewData["HomeBanner"] = "false";
+}
+<div class="clients-page py-lg-70 py-20">
+    <div class="container">
+
+        <div class="row">
+            @if (Model != null && Model.ourClients != null && Model.ourClients.Any())
+
+            {
+            <div class="col-lg-9">
+                <h2 class="title-down-internal wow fadeIn">CLIENTS</h2>
+                <div class="row">
+                    @foreach (var item in Model.ourClients.Where(e => !e.Hidden))
+                    {
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-6 my-10 wow fadeIn" data-wow-delay="">
+                            <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" />
+                        </div>
+
+                    }
+                </div>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination my-lg-30 mb-30">
+                            <li class="page-item">
+
+                            </li>
+
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                if (i == Model.CurrentPage)
+                                {
+                                    <li class="page-item"><a class="page-link" href="#">@i</a></li>
+
+                                }
+                                else
+                                {
+                                    <a class="page-link" href="@Url.Action("Client", new { page = i })">@i</a>
+                                }
+                            }
+
+   
+
+
+
+                        </ul>
+                    </nav>
+
+            </div>
+            }
+            <div class="col-lg-3">
+                <partial name="_VendorsSlider" />
+            </div>
+        </div>
+
+
+    </div>
+</div>

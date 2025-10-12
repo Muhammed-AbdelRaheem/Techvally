@@ -1,0 +1,10 @@
+﻿@model DateTime
+<div class="input-group date datetimepicker" data-target-input="nearest" style="direction:ltr">
+    <input type="text" class="form-control " data-date-format="YYYY/MM/DD"
+           asp-for="@Model"
+           value="@(Model > DateTime.MinValue ? Model.ToString("yyyy/MM/dd",Extantion.GetCultureInfo("en-US")) :null)" />
+    <div class="input-group-addon input-group-append" data-target=".date" data-toggle="date">
+        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    </div>
+</div>
+

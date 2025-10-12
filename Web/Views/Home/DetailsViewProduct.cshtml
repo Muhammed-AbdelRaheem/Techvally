@@ -1,0 +1,96 @@
+﻿@model HomePageVM
+
+@{
+    ViewData["Title"] = "KVM SWITCH CS62T";
+    ViewData["HomeBanner"] = "false";
+}
+<div class="products py-lg-70 py-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-0 order-4 mt-lg-0 mt-md-30 mt-20">
+                <div class="row">
+                    <partial name="_CategoryList" />
+                    <div class="col-lg-12 col-md-6 mt-lg-50">
+                        <partial name="_VendorsSlider" />
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-lg-9 mt-lg-50 mt-md-20">
+                @if (Model != null && Model.getproduct != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-8 wow fadeIn" data-wow-duration="1s" data-wow-delay=".5s">
+                            <div class="slider-for">
+                                <img src="@Config.AssetsDomain@Model.getproduct.Image" alt="Alternate Text" class="img-fluid w-100">
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4  wow fadeIn" data-wow-duration="1s" data-wow-delay="1s">
+                            <div class="switch mt-lg-0 mt-md-30 mt-50">
+                                <h2 class="title-down-internal">@Model.getproduct.Title</h2>
+                                <div class="my-20">
+                                    <span class="pn me-10">
+                                        @Model.getproduct.Title
+                                    </span>
+                                    <br />
+                                    <br />
+                                    <span class="pn-two">
+                                        From: @Model.getproduct.Category.Name
+                                    </span>
+                                </div>
+                                <p class="mt-10">
+                                    @Html.Raw(@Model.getproduct.Content)
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="features mt-lg-50 mt-md-20 mt-30 wow fadeIn" data-wow-duration="1s">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Features</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Feedback</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+
+
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            @Html.Raw(@Model.getproduct.Description)
+                        </div>
+
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            @Html.Raw(@Model.getproduct.Spacification)
+                        </div>
+
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <partial name="_ProductRequest" model="@(new ProductRequest())" />
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

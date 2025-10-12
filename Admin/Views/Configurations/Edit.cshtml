@@ -1,0 +1,352 @@
+﻿@model Configuration
+
+@{
+    ViewData["Title"] = _localizer["Edit"];
+    ViewData["Main"] = _localizer["Configurations"];
+}
+
+<div class="content-wrapper">
+    <div class="page-title">
+        <span class="title-data" data-main='@(ViewData["Main"])'>@ViewData["Title"]</span>
+    </div>
+    <div class="card main-card w-100">
+        <div class="card-body">
+            <form asp-action="Edit">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group row">
+                    <label asp-for="ArName" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="ArName" class="form-control" />
+                        <small><span asp-validation-for="ArName" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="EnName" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="EnName" class="form-control" />
+                        <small><span asp-validation-for="EnName" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+
+
+@*                 <div class="form-group row">
+                    <label asp-for="ArMetaDescription" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.ArMetaDescription)
+                        <small><span asp-validation-for="ArMetaDescription" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <label asp-for="EnMetaDescription" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.EnMetaDescription)
+                        <small><span asp-validation-for="EnMetaDescription" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+@*                 <div class="form-group row">
+                    <label asp-for="ArKeywords" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.ArKeywords)
+                        <small><span asp-validation-for="ArKeywords" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="EnKeywords" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.EnKeywords)
+                        <small><span asp-validation-for="EnKeywords" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+@*                 <div class="form-group row">
+                    <label asp-for="ArFooterBrief" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.ArFooterBrief)
+                        <small><span asp-validation-for="ArFooterBrief" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="EnFooterBrief" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.EnFooterBrief)
+                        <small><span asp-validation-for="EnFooterBrief" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+
+@*                 <div class="form-group row">
+                    <label asp-for="Android" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Android" class="form-control" />
+
+                        <small><span asp-validation-for="Android" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="IOS" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="IOS" class="form-control" />
+
+                        <small><span asp-validation-for="IOS" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+
+                <div class="form-group row">
+                    <label asp-for="Facebook" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Facebook" class="form-control" />
+                        <small><span asp-validation-for="Facebook" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Twitter" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Twitter" class="form-control" />
+                        <small><span asp-validation-for="Twitter" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Youtube" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Youtube" class="form-control" />
+                        <small><span asp-validation-for="Youtube" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Tiktok" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Tiktok" class="form-control" />
+                        <small><span asp-validation-for="Tiktok" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Snapchat" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Snapchat" class="form-control" />
+                        <small><span asp-validation-for="Snapchat" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Instagram" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Instagram" class="form-control" />
+                        <small><span asp-validation-for="Instagram" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+@*                 <div class="form-group row">
+                    <label asp-for="SocialPicture" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.SocialPicture)
+                        <small><span asp-validation-for="SocialPicture" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Tax" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Tax" class="form-control" />
+                        <small><span asp-validation-for="Tax" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+                
+@*                 <div class="form-group row">
+                    <label asp-for="CleanCartAfter" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="CleanCartAfter" class="form-control" />
+                        <small><span asp-validation-for="CleanCartAfter" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="CleanOrderAfter" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="CleanOrderAfter" class="form-control" />
+                        <small><span asp-validation-for="CleanOrderAfter" class="form-text text-danger"></span></small>
+                    </div>
+                </div> *@
+
+                <div class="form-group row">
+                    <label asp-for="Host" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="Host" class="form-control" />
+                        <small><span asp-validation-for="Host" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="EmailSender" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="EmailSender" class="form-control" />
+                        <small><span asp-validation-for="EmailSender" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="PasswordEmailSender" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input type="password" asp-for="PasswordEmailSender" class="form-control" />
+
+                        <small><span asp-validation-for="PasswordEmailSender" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Port" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input type="number" asp-for="Port" class="form-control" />
+                        <small><span asp-validation-for="Port" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group  row">
+                    <label asp-for="UseSSL" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="UseSSL" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="UseSSL"></label>
+                        </label>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group row">
+                    <label asp-for="DefaultEmail" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="DefaultEmail" class="form-control" />
+                        <small><span asp-validation-for="DefaultEmail" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="DefaultEmailName" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="DefaultEmailName" class="form-control" />
+                        <small><span asp-validation-for="DefaultEmailName" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="DefaultNotificationEmails" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.DefaultNotificationEmails)
+                        <small><span asp-validation-for="DefaultNotificationEmails" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="GoogleAnalytics" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="GoogleAnalytics" class="form-control" />
+                        <small><span asp-validation-for="GoogleAnalytics" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="GoogleAnalyticsEmail" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <input asp-for="GoogleAnalyticsEmail" class="form-control" />
+                        <small><span asp-validation-for="GoogleAnalyticsEmail" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="SEOScripts" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        @Html.EditorFor(model => model.SEOScripts)
+
+                        <small><span asp-validation-for="SEOScripts" class="form-text text-danger"></span></small>
+                    </div>
+                </div>
+
+
+                @* <div class="form-group  row"> *@
+                @*     <label asp-for="EnableSubscription" class="col-xl-2 col-lg-3 col-form-label"></label> *@
+                @*     <div class="col-xl-10 col-lg-9"> *@
+                @*         <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0"> *@
+                @*             <input type="checkbox" asp-for="EnableSubscription" class="custom-control-input"> *@
+                @*             <span class="custom-control-label"></span> *@
+                @*             <label class="custom-control-description" asp-for="EnableSubscription"></label> *@
+                @*         </label> *@
+                @*     </div> *@
+                @* </div> *@
+              
+
+@* 
+                <div class="form-group  row">
+                    <label asp-for="PayTabs" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="PayTabs" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="PayTabs"></label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group  row">
+                    <label asp-for="ApplePay" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="ApplePay" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="ApplePay"></label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group  row">
+                    <label asp-for="Mada" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="Mada" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="Mada"></label>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group  row">
+                    <label asp-for="STCPay" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="STCPay" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="STCPay"></label>
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group  row">
+                    <label asp-for="AnyFailedPaymentReturnToCart" class="col-xl-2 col-lg-3 col-form-label"></label>
+                    <div class="col-xl-10 col-lg-9">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" asp-for="AnyFailedPaymentReturnToCart" class="custom-control-input">
+                            <span class="custom-control-label"></span>
+                            <label class="custom-control-description" asp-for="AnyFailedPaymentReturnToCart"></label>
+                        </label>
+                    </div>
+                </div> *@
+                @Html.HiddenFor(model => model.Id)
+              
+
+                <input type="hidden" asp-for="CreatedOnUtc" value="@Model.CreatedOnUtc" />
+                <input type="hidden" asp-for="UpdatedOnUtc" value="@Extantion.AddUtcTime()" />
+
+                <div class="d-flex justify-content-end">
+                    <input type="submit" class="btn btn-primary" value="@_localizer["Save"]" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

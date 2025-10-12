@@ -1,0 +1,99 @@
+﻿    @model HomePageVM
+@{
+    var itemId = (int)ViewData["ItemId"];
+    ViewData["Title"] = "KVN";
+    ViewData["HomeBanner"] = "false";
+}
+<div class="products  py-lg-70 py-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-lg-0 order-4 mt-lg-0">
+                <div class="row">
+                    <partial name="_CategoryList" />
+                    <div class="col-lg-12 col-md-6 mt-lg-50">
+                        <partial name="_VendorsSlider" />
+                    </div>
+                </div>
+
+
+            </div>
+            @if (Model.products != null && Model.products != null && Model.products.Any())
+            {
+            <div class="col-lg-9 mt-lg-30 mt-0">
+                <div class="row">
+                        @foreach (var item in Model.products.Where(e => !e.Hidden))
+                    {
+                        string truncatedDescription = string.Join(" ", item.Description.Split().Take(10));
+
+                        <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="">
+                            <a asp-controller="" asp-action="" asp-route-language="en" class="d-block">
+                                <div class="main-product my-30">
+                                    <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" />
+                                    <div class="step text-center py-10">
+                                        <h2>@item.Title</h2>
+                                     @*    <P class="p-10">
+                                            @Html.Raw(truncatedDescription)
+                                        </P> *@
+                                        <div class="mt-10">
+
+                                            <a asp-controller="Home" asp-action="DetailsViewProduct" asp-route-itemId="@item.CategoryId" asp-route-id="@item.Id">  <span class="cus__btn "> VIEW DETAILS </span></a>
+
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    }
+                </div>
+
+                </div>
+            }
+            else
+            {
+                @if (Model.categories != null && Model.categories != null && Model.categories.Any())
+                {
+                    <div class="col-lg-9 col-md-12 mt-lg-30 mt-0">
+                        <div class="row">
+                            @foreach (var item in Model.categories.Where(e => !e.Hidden))
+                            {
+                                <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="">
+
+                                    <div class="main-product my-30">
+                                        <img src="@item.Image" alt="Alternate Text" class="img-fluid" />
+                                        <div class="step text-center py-10">
+                                            <h2 class="py-10">@item.Name</h2>
+                                            @if (item.ParentCategory?.Name != null)
+
+                                            {
+                                                <h3 class="py-10">Parent Category: @item.ParentCategory?.Name</h3>
+                                            }
+                                            <div class="mt-10">
+                                                <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id" class="">
+                                                    <span class="cus__btn "> VIEW PRODUCTS</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+
+                }
+            }
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

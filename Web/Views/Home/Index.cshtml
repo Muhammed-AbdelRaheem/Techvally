@@ -1,0 +1,251 @@
+﻿@model HomePageVM
+
+@{
+    ViewData["Title"] = "Home";
+    ViewData["HomeBanner"] = "";
+}
+<style>
+    .custom-border {
+        border: 2px solid #eee; /* Red border with 2px width */
+        border-radius: 10px; /* Rounded corners */
+    }
+</style>
+
+
+@if (Model != null && Model.Blocks != null && Model.Blocks.Any(e => e.BlockType == BlockType.HomePage))
+{
+    <div id="homePageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var banners = Model.Blocks
+                .Where(e => e.BlockType == BlockType.HomePage && !e.Hidden)
+                .OrderBy(e => e.DisplayOrder)
+                .ToList();
+            }
+
+            @for (int i = 0; i < banners.Count; i++)
+            {
+                var banner = banners[i];
+                var active = i == 0 ? "active" : "";
+                <div class="carousel-item @active">
+                    <img src="@Config.AssetsDomain@banner.Picture" class="d-block w-100 h-50" alt="@banner.Title" />
+
+
+                </div>
+            }
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#homePageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homePageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+        <div class="carousel-indicators">
+            @for (int i = 0; i < banners.Count; i++)
+            {
+                var active = i == 0 ? "active" : "";
+                <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="@i" class="@active" aria-current="true"></button>
+            }
+        </div>
+    </div>
+}
+
+
+@if (Model != null && Model.profiles != null)
+{
+    @foreach (var item in Model.profiles.Where(e => !e.Hidden))
+    {
+        string truncatedDescription = string.Join(" ", item.Description.Split().Take(38));
+
+        <div class="about my-lg-100 my-50">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 wow slideInLeft">
+                        <div class="left-about back">
+                            <img src="@Config.AssetsDomain@item.HPImage" class="img-fluid " />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 wow slideInRight">
+
+                        <div class="right-about mt-lg-70 mt-40">
+                            <h2 class="about-title mb-20"> @item.HPTitle</h2>
+                            <div class="line">
+
+                                @Html.Raw(truncatedDescription)
+
+
+                            </div>
+                            <br />
+                            <br />
+                            <a asp-action="Profile"
+                               class="cus__btn mt-30">
+                                Read More
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+}
+
+
+@if (Model != null && Model.vendors != null && Model.vendors.Any())
+{
+    <div class="vendors my-lg-100 my-50 ">
+        <div class="container">
+            <div class="main-vendors p-lg-100 py-50">
+                <h2 class="title mb-60 wow fadeIn"> OUR VENDORS</h2>
+                <div class="row">
+                    @foreach (var item in Model.vendors.Where(e => !e.Hidden))
+                    {
+
+
+                        <div class="col-md-3 col-6 mb-50 text-center wow fadeIn">
+                            <a href="@item.Url" target="_blank" class="d-block"> <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" /></a>
+
+
+                        </div>
+
+                    }
+                </div>
+
+                <div class="text-center mt-lg-50 ">
+                    <a asp-controller="Home" asp-action="Vendor" asp-route-language="en">  <span class="cus__btn "> check our vendors </span></a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+
+<div class="offers my-lg-100 my-50">
+    <div class="container">
+        <div class="main-offers mb-50">
+            <h2 class="title mb-30 ms-lg-100 ms-md-70 ms-0 wow fadeIn">WHAT WE OFFER</h2>
+            <p class="wow fadeIn">
+                TECHVALLEY Started its business activities 2008 as a Value-Added Distributor of
+            </p>
+            <p class="wow fadeIn">   Professional Audio/ Visual solutions and Security systems for Middle East .</p>
+        </div>
+        @if (Model != null && Model.categories != null && Model.categories.Any())
+        {
+            <div class="row">
+                @foreach (var item in Model.categories.Where(e => !e.Hidden))
+                {
+                    string truncatedDescription = string.Join(" ", item.Description.Split().Take(10));
+
+                    <div class=" col-xl-3 col-lg-4 col-md-6 mb-50 wow fadeIn" data-wow-delay="">
+                        <a href="#" class="d-block">
+                            <div class="offer">
+                                <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid w-100  custom-border" />
+                                <div class="offer-title p-20">
+                                    <div class="offer-aten">
+                                        @item.Name
+                                    </div>
+                                    <div class="progress my-20 ">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    @Html.Raw(truncatedDescription)
+                                    <div class="mt-10 mb-10">
+
+                                        <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id" class="cus__btn ">
+                                            <span> view products</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model != null && Model.ourClients != null && Model.ourClients.Any())
+{
+    <div class="clients my-lg-100 my-50 ">
+        <div class="container">
+            <div class="main-clients">
+                <h2 class="title mb-80 ms-lg-100 ms-md-70 ms-0 wow fadeIn" data-wow-delay=".2s"> OUR CLIENTS</h2>
+                <div class="clients-slider">
+                    @foreach (var item in Model.ourClients.Where(e => !e.Hidden))
+                    {
+
+                        <div class="clients-name wow fadeIn">
+                            <a href="@item.Url" target="_blank" class="d-block"> <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" /></a>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+<div class="part-two">
+
+
+    <div class="contact py-100">
+        <div class="container">
+            <div class="row">
+                <div class=" col-xl-6 col-lg-6 wow slideInLeft ">
+
+                    <partial name="_MessageForm" model="@(new MessageForm())" />
+ 
+
+                </div>
+                <div class="col-xl-6  col-lg-6 wow slideInRight ">
+
+                    <div class="info mt-lg-0 mt-50 ms-lg-50  md-lg-0 ms-0">
+                        @if (Model != null && Model.contacts != null && Model.contacts.Any())
+                        {
+                            <div class="contact-info">
+                                <h2 class="title-down mb-20">CONTACT INFO.</h2>
+                                @foreach (var item in Model.contacts.Where(e => !e.Hidden))
+                                {
+                                    <div class="office text-black">
+                                        <h2>  @item.Title </h2>
+                                        <h6> Address:   @Html.Raw(item.Address) </h6>
+                                        <h6> Tel:    @Html.Raw(item.Tel) </h6>
+                                        <h6> Fax:   @Html.Raw(item.Fax) </h6>
+                                        
+                                    </div>
+
+
+                                }
+
+
+                            </div>
+
+
+                        }
+                        <img src="/images/front/patterl-blue.svg" alt="Alternate Text" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

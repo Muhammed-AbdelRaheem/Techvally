@@ -1,0 +1,39 @@
+﻿
+
+<div class="larg-nav">
+    <div class="container">
+        <div class="main-nav d-flex my-10">
+            <div class="nav-logo">
+                <a asp-controller="Home" asp-action="Index" asp-route-language="en">   <img src="/images/front/nav-logo.jpg" alt="Alternate Text" class="img-fluid" /></a>
+
+            </div>
+            <div class="nav-item">
+                <div class="nav-move">
+                    <div class="close d-lg-none d-block text-end">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class=" small-logo d-lg-none d-block ">
+                        <img src="/images/front/favicon.png" alt="Alternate Text" />
+                    </div>
+                    <ul class="list-unstyled">
+
+                        <li class="@Html.IsSelected("Home", "Index")"> <a asp-controller="Home" asp-action="Index" asp-route-language="en">HOME</a></li>
+                        <li class="@Html.IsSelected("Home", "Profile")"> <a asp-controller="Home" asp-action="Profile" asp-route-language="en">PROFILE</a> </li>
+                        <li class="@Html.IsSelected("Home", "CategoryPage,CategoryPage2,CategoryPage3")"> <a asp-controller="Home" asp-action="CategoryPage" asp-route-language="en">PRODUCTS</a></li>
+                        <li class="@Html.IsSelected("Home", "Vender")"> <a asp-controller="Home" asp-action="Vendor" asp-route-language="en">VENDORS</a></li>
+                        <li class="@Html.IsSelected("Home", "Client")"> <a asp-controller="Home" asp-action="Client" asp-route-language="en">CLIENTS</a></li>
+                        <li class="@Html.IsSelected("Home", "ContactUs")"> <a asp-controller="Home" asp-action="ContactUs" asp-route-language="en">CONTACT US</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        @*    <partial name="_LoginPartial" />*@
+            <div class="nav-icon d-lg-none d-block">
+                <i class=" fa fa-bars"></i>
+            </div>
+        </div>
+    </div>
+    <div class="overlay">
+    </div>
+</div>
+

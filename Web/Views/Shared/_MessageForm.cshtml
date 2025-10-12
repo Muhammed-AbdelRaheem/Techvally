@@ -1,0 +1,116 @@
+﻿@model MessageForm
+
+
+
+<form method="post" asp-action="ContactUs" class="row">
+
+
+ 
+                <div asp-validation-summary="All"></div>
+
+
+                <div class="join mt-50 wow slideInLeft" data-wow-duration="1s">
+                    <h2 class="title-down-internal">Message</h2>
+
+     
+
+                    <div class="form">
+                        <label class="mt-2" asp-for="Name"></label>
+            <input asp-for="Name" id="input" class="form-control mt-0" placeholder="Name" style=" height: 40px; "/>
+            <small><span asp-validation-for="Name" class="form-text text-danger"></span></small>
+
+                    </div>
+                    <div class="form">
+            <label class ="mt-2" asp-for="Email"></label>
+            <input asp-for="Email" class="form-control mt-0" placeholder="Email" style=" height: 40px; " />
+            <small>
+                <span asp-validation-for="Email" class="form-text text-danger" ></span>
+            </small>
+
+                    </div>
+                    <div class="form">
+            <label class="mt-2" asp-for="Mobile"></label>
+            <input asp-for="Mobile" class="form-control mt-0" placeholder="Mobile" style=" height: 40px; " />
+            <small><span asp-validation-for="Mobile" class="form-text text-danger"></span></small>
+
+                    </div>
+                    <div class="form">
+            <label class="mt-2" asp-for="Country"></label>
+            <input asp-for="Country" class="form-control mt-0" placeholder="Country" style="height: 40px; " />
+            <small><span asp-validation-for="Country" class="form-text text-danger"></span></small>
+
+                    </div>
+                    <div class="form">
+            <label class="mt-2" asp-for="JobTitle"></label>
+            <input asp-for="JobTitle" class="form-control mt-0" placeholder="Job Title" style=" height: 40px; " />
+            <small><span asp-validation-for="JobTitle" class="form-text text-danger"></span></small>
+
+                    </div>
+                    <div class="form">
+            <label class="mt-2" asp-for="Company"></label>
+            <input asp-for="Company" class="form-control mt-0" placeholder="Company" style=" height: 40px; " />
+            <small><span asp-validation-for="Company" class="form-text text-danger"></span></small>
+
+                    </div>
+                    <div class="form">
+            <label class="mt-2" asp-for="Subject"></label>
+            <input asp-for="Subject" class="form-control mt-0" placeholder="Subject" style="  height: 40px; " />
+            <small><span asp-validation-for="Subject" class="form-text text-danger"></span></small>
+
+                    </div>
+                 
+                    <div class="form">
+            <label class="mt-2" asp-for="Message"> </label>
+            <textarea asp-for="Message" class="form-control mt-0" placeholder="Message" id="floatingTextarea"></textarea>
+            <small><span asp-validation-for="Message" class="form-text text-danger"></span></small>
+
+                    </div>
+
+                    <div class="text-end ">
+                        <button type="submit" class="cus__btn"> SUBMIT</button>
+                    </div>
+
+                </div>
+
+
+                <input type="hidden" asp-for="CreatedOnUtc" value="@DateTime.Now.ToUniversalTime()"/>
+                <input type="hidden" asp-for="UpdatedOnUtc" value="@DateTime.Now.ToUniversalTime()"/>
+</form>
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        });
+    </script>
+
+
+
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+
+
+
+}

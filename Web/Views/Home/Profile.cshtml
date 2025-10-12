@@ -1,0 +1,26 @@
+﻿@using DataAccess.Services
+@{
+    ViewData["Title"] = "PROFILE";
+    ViewData["HomeBanner"] = "false";
+}
+
+@model HomePageVM
+
+
+<div class="profile py-lg-70">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.profiles.Where(e => !e.Hidden))
+            {
+                <div class="col-lg-9 col-md-9 my-lg-0 my-lg-20 my-md-20 my-20">
+                    <h2 class="title-down-internal mb-20"> PROFILE</h2>
+                    <img src="@Config.AssetsDomain@item.DImage" alt="Alternate Text" class="img-fluid" />
+                    @Html.Raw(item.Description)
+            </div>
+            }
+            <div class="col-lg-3 col-md-3 my-lg-20  my-md-20 mb-lg-0 mb-20 ">
+                <partial name="_VendorsSlider" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@using Admin
+@using Domain.Models
+@using Microsoft.Extensions.Localization
+@using Models.ViewModel
+@using DataAccess.Services
+@using Utility
+@using Domain.Models.ManageViewModels
+@using Domain.Models.AccountViewModels
+
+
+
+@inject IStringLocalizer<SharedResource> _localizer
+
+@addTagHelper *, JqueryDataTables.ServerSide.AspNetCoreWeb
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

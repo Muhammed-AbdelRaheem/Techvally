@@ -1,0 +1,71 @@
+﻿@model ProductRequest
+
+
+ 
+
+
+<div class="  ">
+
+    <div class="card shadow border-0 m-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2  text-center">FeedBack Form </h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post"   asp-action="DetailsViewProduct" class="row">
+         <input asp-for="Id" hidden />
+
+                   <div class="form">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name"  class="form-control"  placeholder="Name" />
+                </div>
+                <div class="form">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email"  class="form-control"  placeholder="Email" />
+                </div>
+                <div class="form">
+                    <label asp-for="Mobile"></label>
+                    <input asp-for="Mobile" class="form-control"  placeholder="Mobile" />
+                </div>
+                <div class="form">
+                    <label asp-for="Country"></label>
+                    <input asp-for="Country"  class="form-control" placeholder="Mobile" />
+                </div>
+                <div class="form">
+                    <label asp-for="JobTitle"></label>
+                    <input asp-for="JobTitle"  class="form-control"  placeholder="Job Title" />
+                </div>
+                <div class="form">
+                    <label asp-for="Company"></label>
+                    <input asp-for="Company"  class="form-control"  placeholder="Company" />
+                </div>
+                <div class="form">
+                    <label asp-for="Subject"></label>
+                    <input asp-for="Subject"  class="form-control" placeholder="Subject" />
+                </div>
+                <div class="form">
+                    <label asp-for="Message"></label>
+                    <input asp-for="Message"  class="form-control"  placeholder="Message" />
+                </div>
+
+
+
+
+                            <input type="hidden" asp-for="CreatedOnUtc" value="@DateTime.Now.ToUniversalTime()" />
+                            <input type="hidden" asp-for="UpdatedOnUtc" value="@DateTime.Now.ToUniversalTime()" />
+
+
+                 <div class="text-end pt-20 pb-10">
+                    <button type="submit" class="cus__btn"> SUBMIT</button>
+                </div>
+
+
+
+
+</form>
+        </div>
+    </div>
+    </div>

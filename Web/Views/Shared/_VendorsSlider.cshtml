@@ -1,0 +1,86 @@
+﻿@using DataAccess.Services
+
+
+@inject IVendorRepository _venderRepository;
+
+
+@{
+    var user = await _venderRepository.GetAllasync();
+
+}
+
+@*@{
+    ConfigurationVM seo = await _common.GetSeo(Html.Language());
+}*@
+    
+<div class="sidebar">
+    <div class="vendors-profile wow fadeIn" data-wow-duration=".2s" data-wow-delay=".2s">
+        <h2 class="title-down-internal mb-20 text-center">VENDORS</h2>
+
+        <div id="vendorCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+
+                @if (user != null && user.Any() )
+                {
+                    int i = 0;
+                    foreach (var item in user.Where(m=>m.Hidden !=true))
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <div class="vendors-main text-center ">
+                                <img src="@Config.AssetsDomain@item.Image" alt="@item.Title"
+                                     class="d-block mx-auto vendor-img" />
+                                <div class="vendor-description mt-3">
+                                    @Html.Raw(item.Description)
+                                </div>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                }
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#vendorCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#vendorCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+         
+        </div>
+    </div>
+</div>
+
+
+@* <div class="sidebar">
+    <div class="vendors-profile wow fadeIn" data-wow-duration=".2s" data-wow-delay=".2s">
+        <h2 class="title-down-internal mb-20"> VENDORS</h2>
+
+        <div class="vendors-slider">
+
+            @foreach (var item in user) // Assuming GetAllVendors() returns a list of vendors
+            {
+
+                <div class="vendors-main  w-95% ">
+                    <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid " />
+                    @Html.Raw(item.Description)
+
+                </div>
+
+            }
+
+        </div>
+        
+    </div>
+
+</div>
+ *@
+
+
+
+
+
+
+
