@@ -43,6 +43,8 @@ namespace Domain.Models
 
         [SearchableString()]
         [IncludeInReport(Order = 2)]
+        [Sortable]
+
         public string? HPTitle { get; set; }
 
 
@@ -63,6 +65,8 @@ namespace Domain.Models
 
 
         [IncludeInReport(Order = 6)]
+        [Sortable]
+
         public int DisplayOrder { get; set; }
 
         [IncludeInReport(Order = 7)]
@@ -71,10 +75,14 @@ namespace Domain.Models
 
         [IncludeInReport(Order = 8)]
         [SearchableString]
+        [Sortable]
+
         public string? CreatedOnUtc { get; set; }
 
         [IncludeInReport(Order = 9)]
         [SearchableString]
+        [Sortable]
+
         public string? UpdatedOnUtc { get; set; }
 
 

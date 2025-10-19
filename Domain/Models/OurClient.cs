@@ -31,6 +31,8 @@ namespace Domain.Models
         public int Id { get; set; }
 
         [IncludeInReport(Order = 2)]
+        [Sortable]
+
         public int DisplayOrder { get; set; }
 
         [IncludeInReport(Order = 3)]
@@ -43,10 +45,14 @@ namespace Domain.Models
 
         [IncludeInReport(Order = 5)]
         [SearchableString]
+        [Sortable]
+
         public string? CreatedOnUtc { get; set; }
 
         [IncludeInReport(Order = 6)]
         [SearchableString]
+        [Sortable]
+
         public string? UpdatedOnUtc { get; set; }
     }
 

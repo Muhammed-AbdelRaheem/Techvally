@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = _localizer["Edit"];
-    ViewData["Main"] = _localizer["Contact Us"];
+    ViewData["Main"] = _localizer["Contact"];
 }
 
 
@@ -57,7 +57,7 @@
                     <div class="form-group row">
                         <label asp-for="DisplayOrder" class="col-md-2 col-form-label"></label>
                         <div class="col-md-10">
-                            <input asp-for="DisplayOrder" type="text" class="touchspin touchspin-sm" value="10">
+                            <input asp-for="DisplayOrder" type="text" class="touchspin touchspin-sm" >
                             <small><span asp-validation-for="DisplayOrder" class="form-text text-danger"></span></small>
                         </div>
                     </div>

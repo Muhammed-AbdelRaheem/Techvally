@@ -31,6 +31,8 @@ namespace Domain.Models
 
         public Category? ParentCategory { get; set; }
 
+        [Display(Name = "Sub Category Category")]
+
         public List<Category>? Subcategories { get; set; }
 
         public  ICollection<Product>?  Products { get; set; }
@@ -43,10 +45,14 @@ namespace Domain.Models
     {
         [IncludeInReport(Order = 1)]
         public int Id { get; set; }
+        [IncludeInReport(Order = 2)]
+        public int? ParentCategoryId { get; set; }
 
+        public string? ParentCategoryName { get; set; }
 
         [SearchableString()]
         [IncludeInReport(Order = 2)]
+        [Sortable]
         public string Name { get; set; }
 
 
@@ -56,6 +62,7 @@ namespace Domain.Models
 
 
         [IncludeInReport(Order = 5)]
+        [Sortable]
         public int DisplayOrder { get; set; }
 
         [IncludeInReport(Order = 6)]
@@ -64,10 +71,12 @@ namespace Domain.Models
 
         [IncludeInReport(Order = 7)]
         [SearchableString]
+        [Sortable]
         public string? CreatedOnUtc { get; set; }
 
         [IncludeInReport(Order = 8)]
         [SearchableString]
+        [Sortable]
         public string? UpdatedOnUtc { get; set; }
     }
 
@@ -88,6 +97,8 @@ namespace Domain.Models
         [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Parent Category")]
+        public int? ParentCategoryId { get; set; }
 
         [Required(ErrorMessage = "This {0} field is required")]
         [Display(Name = " Picture")]

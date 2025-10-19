@@ -35,6 +35,37 @@ namespace Domain.Models
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser User { get; set; }
     }
+    public class LogDataTable
+    {
+
+        [SearchableInt]
+   
+        public int Id { get; set; }
+
+
+        [Sortable]
+        public string Action { get; set; }
+
+        [SearchableString]
+        [Sortable]
+        public string Table { get; set; }
+
+        [SearchableString]
+        [Sortable]
+        public string Details { get; set; }
+
+        [SearchableString]
+        [Sortable]
+        public LogUserViewModel User { get; set; }
+
+        [SearchableString]
+        [Sortable]
+        public string IpAddress { get; set; }
+
+        [SearchableString]
+        [Sortable]
+        public DateTime CreatedOnUtc { get; set; } = Extantion.AddUtcTime(3);
+    }
 
 
 
@@ -52,8 +83,8 @@ namespace Domain.Models
         public string Action { get; set; }
 
         [SearchableString]
-        [Sortable]
         [Display(Name = "Table")]
+        [Sortable]
         public string Table { get; set; }
 
         [SearchableString]

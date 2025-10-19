@@ -59,7 +59,7 @@ namespace Admin.Controllers
                 return RedirectToAction("Index","Profile");
 
             }
-            if (blockType == BlockType.Contactus)
+            if (blockType == BlockType.ContactUs)
             {
                 return RedirectToAction("Index", "Contact");
 
@@ -152,7 +152,7 @@ namespace Admin.Controllers
                     var result = await _unitofWork.Block.AddBlockAsync(Block);
                     if (result)
                     {
-                        if (blockType == BlockType.Contactus)
+                        if (blockType == BlockType.ContactUs)
                         {
                             return RedirectToAction("Edit", new { blockType, id = Block.Id });
                         }

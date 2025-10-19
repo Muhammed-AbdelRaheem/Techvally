@@ -21,7 +21,7 @@ public class LogsController : Controller {
     // GET: Admin/Logs
     public IActionResult Index()
     {
-        return View(new LogViewModel());
+        return View(new LogDataTable());
     }
 
     [HttpPost]
@@ -32,7 +32,7 @@ public class LogsController : Controller {
             HttpContext.Session.SetString(nameof(JqueryDataTablesParameters), JsonConvert.SerializeObject(param));
             var results = await _unitofWork.Log.GetLogs(param);
 
-            return new JsonResult(new JqueryDataTablesResult<LogViewModel>
+            return new JsonResult(new JqueryDataTablesResult<LogDataTable>
             {
                 Draw = param.Draw,
                 Data = results.Items,
@@ -53,7 +53,7 @@ public class LogsController : Controller {
 
         var results = await _unitofWork.Log.GetLogs(JsonConvert.DeserializeObject<JqueryDataTablesParameters>(param));
 
-        return new JqueryDataTablesExcelResult<LogViewModel>(results.Items, "Logs", "Logs");
+        return new JqueryDataTablesExcelResult<LogDataTable>(results.Items, "Logs", "Logs");
     }
     public async Task<IActionResult> LogsPrintTable()
     {

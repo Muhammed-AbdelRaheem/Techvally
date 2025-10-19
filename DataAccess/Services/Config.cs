@@ -30,15 +30,8 @@ namespace DataAccess.Services
 
 
         public static string Placeholder { get; set; } = "images/front/placeholder.png";
-
-
-
         public static string Imageflow { get; set; } = "/uploads/images/";
-
-
-
         public static string AdminUserId { get; set; } = "d21e21ed-c2d7-4c1f-a903-9dcfe4f9b3db";
-
         public static string ImageResizerBox { get; set; } = "?w=600&h=600&scale=both&mode=pad";
         public static string Schema { get; set; } = "https://";
         public static string BaseURL { get; set; } = "https://.com";

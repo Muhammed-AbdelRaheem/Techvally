@@ -1,18 +1,21 @@
-﻿using Data;
+﻿using AutoMapper;
+using Data;
 using Data.IRepository;
-using Domain.Models.NotificationHandlerVM;
+using DataAccess.IRepository;
+using DataAccess.Repository;
+using DataAccess.Services;
 using Domain.Models;
+using Domain.Models.NotificationHandlerVM;
+using JqueryDataTables.ServerSide.AspNetCoreWeb.ActionResults;
+using JqueryDataTables.ServerSide.AspNetCoreWeb.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using JqueryDataTables.ServerSide.AspNetCoreWeb.ActionResults;
-using JqueryDataTables.ServerSide.AspNetCoreWeb.Models;
 using Newtonsoft.Json;
-using AutoMapper;
-using DataAccess.IRepository;
-using DataAccess.Services;
+using System.Reflection;
 
 namespace Admin.Controllers
 {
@@ -86,6 +89,8 @@ namespace Admin.Controllers
         // GET: CategoryController/Create
         public async Task<ActionResult> Create()
         {
+            var parentServices = await _categoryRepository.GetAllParentCategoryAsync();
+            ViewData["Services"] = new SelectList(parentServices, "Id", "Name");
             return View();
         }
 
@@ -114,6 +119,8 @@ namespace Admin.Controllers
                             Action = ControllerContext.ActionDescriptor.ActionName,
                             Details = $"Created Category  {categoryVM.Name} with Id {categoryVM.Id}",
                         });
+                        TempData["success"] = "  Create successfully";
+
                         return RedirectToAction(nameof(Index));
                     }
                 }
@@ -122,7 +129,8 @@ namespace Admin.Controllers
                 }
 
             }
-
+            var parentServices = await _categoryRepository.GetAllParentCategoryAsync();
+            ViewData["Services"] = new SelectList(parentServices, "Id", "Name", categoryVM.ParentCategoryId);
 
             return View(categoryVM);
 
@@ -144,7 +152,8 @@ namespace Admin.Controllers
                 return NotFound();
 
             }
-
+            var parentServices = await _categoryRepository.GetAllParentCategoryAsync(id);
+            ViewData["Services"] = new SelectList(parentServices, "Id", "Name");
             return View(categoryVM);
         }
 
@@ -193,7 +202,8 @@ namespace Admin.Controllers
                     }
                 }
             }
-
+            var parentServices = await _categoryRepository.GetAllParentCategoryAsync();
+            ViewData["Services"] = new SelectList(parentServices, "Id", "Name", categoryvm.ParentCategoryId);
             return View(categoryvm);
         }
 

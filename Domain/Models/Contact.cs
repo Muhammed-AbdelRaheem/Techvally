@@ -29,22 +29,29 @@ namespace Domain.Models
 
         [SearchableString()]
         [IncludeInReport(Order = 2)]
+        [Sortable]
         public string Title { get; set; }
 
 
         [SearchableString()]
         [IncludeInReport(Order = 3)]
+        [Sortable]
         public string? Address { get; set; }
+
         [SearchableString()]
         [IncludeInReport(Order = 4)]
+        [Sortable]
         public string? Tel { get; set; }
+
         [SearchableString()]
         [IncludeInReport(Order = 5)]
+        [Sortable]
         public string? Fax { get; set; }
 
 
 
         [IncludeInReport(Order = 6)]
+        [Sortable]
         public int DisplayOrder { get; set; }
 
         [IncludeInReport(Order = 7)]
@@ -53,10 +60,12 @@ namespace Domain.Models
 
         [IncludeInReport(Order = 8)]
         [SearchableString]
+        [Sortable]
         public string? CreatedOnUtc { get; set; }
 
         [IncludeInReport(Order = 9)]
         [SearchableString]
+        [Sortable]
         public string? UpdatedOnUtc { get; set; }
 
 

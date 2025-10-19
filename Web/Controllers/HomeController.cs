@@ -14,137 +14,13 @@ namespace Web.Controllers
 
         private readonly IUnitofWork _UnitofWork;
 
-        private readonly ILogger<HomeController> _logger;
-
-
-        public HomeController(ILogger<HomeController> logger, IUnitofWork UnitofWork)
+        public HomeController( IUnitofWork UnitofWork)
         {
-            _logger = logger;
+          
             _UnitofWork = UnitofWork;
 
 
         }
-
-
-
-        public async Task<IActionResult> CategoryPage(int page = 1)
-        {
-            int pageSize = 3;
-            IEnumerable<Category> allitems = await _UnitofWork.Category.GetAllCategoryAsync();
-
-
-            allitems = allitems.Where(e => !e.Hidden);
-
-            int totalProducts = allitems.Count();
-            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-            page = Math.Max(1, Math.Min(page, totalPages));
-
-            List<Category> category = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            var viewModel = new HomePageVM
-            {
-                categories = category,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
-            return View(viewModel);
-        }
-
-
-
-
-        public async Task<IActionResult> ViewProduct(int itemId)
-        {
-            var product = await _UnitofWork.Product.GetAllProductAsync(itemId);
-            if (product is null)
-            {
-                return NotFound();
-            }
-
-            var category = await _UnitofWork.Category.GetAllparentCategorywithsub(itemId);
-            if (category is null)
-            {
-                return NotFound();
-            }
-
-            HomePageVM headerVM = new()
-            {
-
-                categories = category.ToList(),
-                products = product.ToList(),
-
-            };
-
-
-            ViewData["ItemId"] = itemId;
-            return View(headerVM);
-        }
-
-
-
-
-
-
-
-        public async Task<IActionResult> DetailsViewProduct(int id, int itemId)
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var banner = await _UnitofWork.Product.GetAsync(id);
-            if (banner == null)
-            {
-                return NotFound();
-
-            }
-
-            //IEnumerable<SelectListItem> ProductList = _productRepository.GetAll().Select(i => new SelectListItem
-            //{
-            //    Text = i.Title,
-            //    Value = i.Id.ToString()
-            //});
-
-            //ViewData["ProductList"] = ProductList;
-
-            ViewData["ItemId"] = itemId;
-
-            HomePageVM headerVM = new()
-            {
-                getproduct = banner,
-
-
-            };
-
-
-            return View(headerVM);
-        }
-
-
-
-        // post create
-        [HttpPost]
-        public async Task<IActionResult> DetailsViewProduct(ProductRequest homePageVM)
-        {
-
-
-
-            //Validation for sliver side
-            if (ModelState.IsValid)
-            {
-                await _UnitofWork.ProductRequest.AddServiceRequestAsync(homePageVM);
-
-                TempData["success"] = " Create successfully";
-                return RedirectToAction(nameof(DetailsViewProduct));
-            }
-
-            return View();
-        }
-
-
-
         public async Task<IActionResult> Index()
         {
 
@@ -204,13 +80,120 @@ namespace Web.Controllers
                 //feeds = testimonial.ToList(),
                 contacts = contact.ToList(),
                 categories = category.ToList(),
-                Blocks = homepage.ToList() 
+                Blocks = homepage.ToList()
             };
 
             return View(headerVM);
         }
 
+        //Category
+        public async Task<IActionResult> CategoryPage(int page = 1)
+        {
+            int pageSize = 3;
+            IEnumerable<Category> allitems = await _UnitofWork.Category.GetAllCategoryAsync();
 
+
+            allitems = allitems.Where(e => !e.Hidden);
+
+            int totalProducts = allitems.Count();
+            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            List<Category> category = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new HomePageVM
+            {
+                categories = category,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(viewModel);
+        }
+
+
+        //Product
+        public async Task<IActionResult> ViewProduct(int itemId)
+        {
+            var product = await _UnitofWork.Product.GetAllProductAsync(itemId);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            var category = await _UnitofWork.Category.GetAllparentCategorywithsub(itemId);
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            HomePageVM headerVM = new()
+            {
+
+                categories = category.ToList(),
+                products = product.ToList(),
+
+            };
+
+
+            ViewData["ItemId"] = itemId;
+            return View(headerVM);
+        }
+
+        public async Task<IActionResult> DetailsViewProduct(int id, int itemId)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var banner = await _UnitofWork.Product.GetAsync(id);
+            if (banner == null)
+            {
+                return NotFound();
+
+            }
+
+            //IEnumerable<SelectListItem> ProductList = _productRepository.GetAll().Select(i => new SelectListItem
+            //{
+            //    Text = i.Title,
+            //    Value = i.Id.ToString()
+            //});
+
+            //ViewData["ProductList"] = ProductList;
+
+            ViewData["ItemId"] = itemId;
+
+            HomePageVM headerVM = new()
+            {
+                getproduct = banner,
+
+
+            };
+
+
+            return View(headerVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DetailsViewProduct(ProductRequest homePageVM)
+        {
+
+
+
+            //Validation for sliver side
+            if (ModelState.IsValid)
+            {
+                await _UnitofWork.ProductRequest.AddServiceRequestAsync(homePageVM);
+
+                TempData["success"] = " Create successfully";
+                return RedirectToAction(nameof(DetailsViewProduct));
+            }
+
+            return View();
+        }
+
+
+        //Profile
         public async Task<IActionResult> Profile()
         {
 
@@ -250,8 +233,156 @@ namespace Web.Controllers
             return View(headerVM);
 
         }
+        //Vendor
+        public async Task<IActionResult> Vendor(int page = 1)
+        {
+            int pageSize = 3;
+            IEnumerable<Vendor> allVendros = await _UnitofWork.Vendor.GetAllasync();
+
+            allVendros = allVendros.Where(e => !e.Hidden);
+
+            int totalVendors = allVendros.Count();
+            int totalPages = (int)Math.Ceiling((double)totalVendors / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            List<Vendor> vendors = allVendros.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new PaginationVenderVM
+            {
+                vendors = vendors,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(viewModel);
+        }
+        //Client
+        public async Task<IActionResult> Client(int page = 1)
+        {
+            int pageSize = 8;
+            IEnumerable<OurClient> allitems = await _UnitofWork.OurClient.GetAllasync();
+
+            // Filter out hidden items
+            allitems = allitems.Where(e => !e.Hidden);
+
+            // Calculate the total number of pages
+            int totalProducts = allitems.Count();
+            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+            List<OurClient> client = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new HomePageVM
+            {
+                ourClients = client,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(viewModel);
+        }
 
 
+
+        //LastestNews
+        public async Task<IActionResult> LatestNews(int page = 1)
+        {
+            int pageSize = 3;
+            IEnumerable<LastestNews> allitems = await _UnitofWork.LastestNews.GetAllasync();
+
+
+            allitems = allitems.Where(e => !e.Hidden);
+
+            int totalProducts = allitems.Count();
+            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+            page = Math.Max(1, Math.Min(page, totalPages));
+
+
+            List<LastestNews> news = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new HomePageVM
+            {
+                LastestNews = news,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> LastestNewsDetails(int id)
+        {
+            // how to create edit btton
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            LastestNews lenstypefromDb = await _UnitofWork.LastestNews.Getasync(id); ;
+            if (lenstypefromDb == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(lenstypefromDb);
+        }
+
+
+        //ContactUs
+        public async Task<IActionResult> ContactUs()
+        {
+
+
+            var contactt = await _UnitofWork.Contact.GetAllasync();
+            if (contactt is null)
+            {
+                return NotFound();
+            }
+
+            HomePageVM headerVM = new()
+            {
+
+                contacts = contactt.ToList(),
+
+            };
+
+            return View(headerVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(MessageForm homePageVM)
+        {
+
+            //Validation for sliver side
+            if (ModelState.IsValid)
+            {
+                await _UnitofWork.MessageForm.AddMessageFormAsync(homePageVM);
+
+                TempData["success"] = " Create successfully";
+                return RedirectToAction(nameof(ContactUs));
+            }
+
+            return View();
+        }
+
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            // TODO: Load state from previously suspended application2
+
+            return View(new Domain.Models.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+        #region Not Use
         //public async Task<IActionResult> Solution(int page = 1)
         //{
         //    int pageSize = 3; // Number of products to display per page
@@ -299,30 +430,6 @@ namespace Web.Controllers
         //    return View(lenstypefromDb);
         //}
 
-        public async Task<IActionResult> Vendor(int page = 1)
-        {
-            int pageSize = 2;
-            IEnumerable<Vendor> allProducts = await _UnitofWork.Vendor.GetAllasync();
-
-            allProducts = allProducts.Where(e => !e.Hidden);
-
-            int totalProducts = allProducts.Count();
-            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-            page = Math.Max(1, Math.Min(page, totalPages));
-
-            List<Vendor> venders = allProducts.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            var viewModel = new PaginationVenderVM
-            {
-                vendors = venders,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
-            return View(viewModel);
-        }
-
-
         //public async Task<IActionResult> Promotion()
         //{
 
@@ -364,122 +471,6 @@ namespace Web.Controllers
 
 
 
-        public async Task<IActionResult> Client(int page = 1)
-        {
-            int pageSize = 8;
-            IEnumerable<OurClient> allitems = await _UnitofWork.OurClient.GetAllasync();
-
-            // Filter out hidden items
-            allitems = allitems.Where(e => !e.Hidden);
-
-            // Calculate the total number of pages
-            int totalProducts = allitems.Count();
-            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-            page = Math.Max(1, Math.Min(page, totalPages));
-
-            List<OurClient> client = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            var viewModel = new HomePageVM
-            {
-                ourClients = client,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
-            return View(viewModel);
-        }
-
-
-        public async Task<IActionResult> LatestNews(int page = 1)
-        {
-            int pageSize = 3;
-            IEnumerable<LastestNews> allitems = await _UnitofWork.LastestNews.GetAllasync();
-
-
-            allitems = allitems.Where(e => !e.Hidden);
-
-            int totalProducts = allitems.Count();
-            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-
-            page = Math.Max(1, Math.Min(page, totalPages));
-
-
-            List<LastestNews> news = allitems.Where(e => !e.Hidden).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            var viewModel = new HomePageVM
-            {
-                LastestNews = news,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
-            return View(viewModel);
-        }
-
-        public async Task<IActionResult> LastestNewsDetails(int id)
-        {
-            // how to create edit btton
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            LastestNews lenstypefromDb = await _UnitofWork.LastestNews.Getasync(id); ;
-            if (lenstypefromDb == null)
-            {
-                return NotFound();
-            }
-
-
-            return View(lenstypefromDb);
-        }
-
-        public async Task<IActionResult> ContactUs()
-        {
-
-
-            var contactt = await _UnitofWork.Contact.GetAllasync();
-            if (contactt is null)
-            {
-                return NotFound();
-            }
-
-            HomePageVM headerVM = new()
-            {
-
-                contacts = contactt.ToList(),
-
-            };
-
-            return View(headerVM);
-        }
-
-
-
-
-
-
-
-
-        // post create
-        [HttpPost]
-        public async Task<IActionResult> ContactUs(MessageForm homePageVM)
-        {
-
-            //Validation for sliver side
-            if (ModelState.IsValid)
-            {
-                await _UnitofWork.MessageForm.AddMessageFormAsync(homePageVM);
-
-                TempData["success"] = " Create successfully";
-                return RedirectToAction(nameof(ContactUs));
-            }
-
-            return View();
-        }
-
-
-
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> ContactForm(string language, Feedback feedback)
@@ -509,18 +500,4 @@ namespace Web.Controllers
         //    return RedirectToAction("Index", new { language });
         //}
 
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            // TODO: Load state from previously suspended application2
-
-            return View(new Domain.Models.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
-}
+        #endregion

@@ -174,7 +174,7 @@ namespace DataAccess.Repository
 
 
 
-                var query = _read.Categories.Where(e => !e.Deleted).OrderByDescending(t => t.Id).AsNoTracking();
+                var query = _read.Categories.Where(e => !e.Deleted /*&& e.ParentCategoryId == null*/).OrderByDescending(t => t.ParentCategoryId).AsNoTracking();
 
 
 

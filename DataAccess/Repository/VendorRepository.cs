@@ -141,19 +141,13 @@ namespace DataAccess.IRepository
             try
             {
 
-
-
                 var query = _read.Vendor.Where(e => !e.Deleted).OrderByDescending(t => t.Id).AsNoTracking();
-
-
 
                 query = query.Where(
                    e =>
                    string.IsNullOrEmpty(table.Search.Value) ||
                    (
                        e.Id.ToString().Contains(table.Search.Value)
-
-
 
                    )
                );

@@ -84,15 +84,15 @@ namespace Admin.Controllers
         }
 
 
-        // GET: ProductController/Create
+       // GET: ProductController/Create
         public async Task<ActionResult> Create()
         {
+
             ViewBag.category = await _unitofWork.Category.GetCategorySelectListAsync();
 
             return View();
         }
-
-        // POST: ProductController/Create
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductVM   masterVM)
@@ -102,9 +102,7 @@ namespace Admin.Controllers
             {
                 try
                 {
-                    // Force UTC Kind before mapping
-                    masterVM.CreatedOnUtc = DateTime.SpecifyKind(masterVM.CreatedOnUtc, DateTimeKind.Utc);
-                    masterVM.UpdatedOnUtc = DateTime.SpecifyKind(masterVM.UpdatedOnUtc, DateTimeKind.Utc);
+                    
 
                     var result2 = _mapper.Map<Product>(masterVM);
 

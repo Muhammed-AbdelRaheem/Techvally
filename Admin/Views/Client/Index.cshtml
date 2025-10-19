@@ -194,12 +194,20 @@
                             searchable: false,
                             name: "eq",
                             title: "Created At",
+
+                                render: function (data) {
+                                return data ? data.split('.')[0] : "";
+                        }
                         },
                         {
                             data: "UpdatedOnUtc",
                             searchable: false,
                             name: "eq",
                             title: "Updated At",
+
+                                render: function (data) {
+                                return data ? data.split('.')[0] : "";
+                        }
                         },
 
                     ]

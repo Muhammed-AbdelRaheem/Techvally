@@ -26,14 +26,12 @@
                         string truncatedDescription = string.Join(" ", item.Description.Split().Take(10));
 
                         <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="">
-                            <a asp-controller="" asp-action="" asp-route-language="en" class="d-block">
+                                <a asp-controller="Home" asp-action="DetailsViewProduct" asp-route-itemId="@item.CategoryId" asp-route-id="@item.Id" asp-route-language="en" class="d-block">
                                 <div class="main-product my-30">
                                     <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" />
                                     <div class="step text-center py-10">
                                         <h2>@item.Title</h2>
-                                     @*    <P class="p-10">
-                                            @Html.Raw(truncatedDescription)
-                                        </P> *@
+                                   
                                         <div class="mt-10">
 
                                             <a asp-controller="Home" asp-action="DetailsViewProduct" asp-route-itemId="@item.CategoryId" asp-route-id="@item.Id">  <span class="cus__btn "> VIEW DETAILS </span></a>
@@ -61,7 +59,7 @@
                                 <div class="col-lg-4 col-md-6 wow fadeIn" data-wow-delay="">
 
                                     <div class="main-product my-30">
-                                        <img src="@item.Image" alt="Alternate Text" class="img-fluid" />
+                                        <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid" />
                                         <div class="step text-center py-10">
                                             <h2 class="py-10">@item.Name</h2>
                                             @if (item.ParentCategory?.Name != null)

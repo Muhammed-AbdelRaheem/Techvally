@@ -21,6 +21,7 @@ namespace Dataaccess.AutoMapper
             int allLevelsCount = 0;
 
             CreateMap<Log, LogViewModel>().ForMember(dest => dest.CreatedOnUtc, opt => opt.MapFrom(src => src.CreatedOnUtc.ToUniversalTime())).ReverseMap();
+            CreateMap<Log, LogDataTable>().ReverseMap();
             CreateMap<ApplicationUser, LogUserViewModel>();
             CreateMap<ApplicationUser, UserEditInfoViewModel>();
             CreateMap<ApplicationUser, UserTableViewModel>()
@@ -131,7 +132,9 @@ namespace Dataaccess.AutoMapper
                  .ReverseMap();
 
 
-            CreateMap<Category, CategoryTableData>().ReverseMap();
+            CreateMap<Category, CategoryTableData>()
+            .ForMember(dest => dest.ParentCategoryName,opt => opt.MapFrom(src => src.ParentCategory != null ? src.ParentCategory.Name : null))
+            .ReverseMap();
             CreateMap<CategoryVM, Category>()
             .ForMember(dest => dest.CreatedOnUtc, opt => opt.MapFrom(src => src.CreatedOnUtc.ToUniversalTime()))
             .ForMember(dest => dest.UpdatedOnUtc, opt => opt.MapFrom(src => src.UpdatedOnUtc.ToUniversalTime()))
@@ -149,7 +152,8 @@ namespace Dataaccess.AutoMapper
             CreateMap<Vendor, VendorDataTable>().ReverseMap();
             CreateMap<VendorVM, Vendor>()
                 .ForMember(dest => dest.CreatedOnUtc, opt => opt.MapFrom(src => src.CreatedOnUtc.ToUniversalTime()))
-                .ForMember(dest => dest.UpdatedOnUtc, opt => opt.MapFrom(src => src.UpdatedOnUtc.ToUniversalTime())).ReverseMap();
+                .ForMember(dest => dest.UpdatedOnUtc, opt => opt.MapFrom(src => src.UpdatedOnUtc.ToUniversalTime()))
+                .ReverseMap();
 
 
             CreateMap<Contact, ContactDataTable>().ReverseMap();

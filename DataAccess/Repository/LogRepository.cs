@@ -84,12 +84,12 @@ namespace DataAccess.Repository
             { }
         }
 
-        public async Task<JqueryDataTablesPagedResults<LogViewModel>> GetLogs(JqueryDataTablesParameters table)
+        public async Task<JqueryDataTablesPagedResults<LogDataTable>> GetLogs(JqueryDataTablesParameters table)
         {
             IQueryable<Log> query = _read.Log.AsNoTracking();
 
-            query = SearchOptionsProcessor<LogViewModel, Log>.Apply(query, table.Columns);
-            query = SortOptionsProcessor<LogViewModel, Log>.Apply(query, table);
+            query = SearchOptionsProcessor<LogDataTable, Log>.Apply(query, table.Columns);
+            query = SortOptionsProcessor<LogDataTable, Log>.Apply(query, table);
 
             var size = await query.CountAsync();
             try
@@ -111,10 +111,10 @@ namespace DataAccess.Repository
                .OrderByDescending(e => e.CreatedOnUtc)
                .Skip(table.Start / table.Length * table.Length)
                .Take(table.Length)
-               .ProjectTo<LogViewModel>(_autoMapper.ConfigurationProvider)
+               .ProjectTo<LogDataTable>(_autoMapper.ConfigurationProvider)
                .ToArrayAsync();
 
-                return new JqueryDataTablesPagedResults<LogViewModel>
+                return new JqueryDataTablesPagedResults<LogDataTable>
                 {
                     Items = items,
                     TotalSize = size

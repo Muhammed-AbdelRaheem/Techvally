@@ -30,16 +30,12 @@
                             <span>@_localizer[BlockType.Profile.DisplayName()]</span>
                         </a>
                     </li>
-                    <li class="@(Html.GetId("blockType") == BlockType.Contactus.ToString() ? "active" : "")">
-                        <a asp-controller="Blocks" asp-action="Index" asp-route-blockType="@BlockType.Contactus">
-                            <span>@_localizer[BlockType.Contactus.DisplayName()]</span>
+                    <li class="@(Html.GetId("blockType") == BlockType.ContactUs.ToString() ? "active" : "")">
+                        <a asp-controller="Blocks" asp-action="Index" asp-route-blockType="@BlockType.ContactUs">
+                            <span>@_localizer[BlockType.ContactUs.DisplayName()]</span>
                         </a>
                     </li>
-                    <li class="@(Html.GetId("blockType") == BlockType.LastestNews.ToString() ? "active" : "")">
-                        <a asp-controller="Blocks" asp-action="Index" asp-route-blockType="@BlockType.LastestNews">
-                            <span>@_localizer[BlockType.LastestNews.DisplayName()]</span>
-                        </a>
-                    </li>
+                 
 
                         <li class="@Html.IsSelected("Users", "Index,Users")">
                             <a href="javascript:void(0)" class="has-arrow">

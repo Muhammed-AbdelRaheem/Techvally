@@ -149,7 +149,7 @@
                     string truncatedDescription = string.Join(" ", item.Description.Split().Take(10));
 
                     <div class=" col-xl-3 col-lg-4 col-md-6 mb-50 wow fadeIn" data-wow-delay="">
-                        <a href="#" class="d-block">
+                        <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id" class="d-block">
                             <div class="offer">
                                 <img src="@Config.AssetsDomain@item.Image" alt="Alternate Text" class="img-fluid w-100  custom-border" />
                                 <div class="offer-title p-20">

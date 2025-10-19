@@ -7,7 +7,7 @@ namespace DataAccess.IRepository
 {
     public interface ILogRepository
     {
-        public Task<JqueryDataTablesPagedResults<LogViewModel>> GetLogs(JqueryDataTablesParameters table);
+        public Task<JqueryDataTablesPagedResults<LogDataTable>> GetLogs(JqueryDataTablesParameters table);
         public Task AddLogAsync(LogAddViewModel logAddViewModel);
         public Task CleanLogAsync(string actionName, string controllerName);
 

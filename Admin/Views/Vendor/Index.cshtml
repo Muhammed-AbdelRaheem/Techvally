@@ -72,6 +72,7 @@
                     autoWidth: false,
                     deferRender: true,
                     lengthMenu: [10, 50, 100, 1000],
+
                     order: [[0, "desc"]],
                     buttons: [
                         { extend: 'reload', className: 'btn my_btn btn-sm reload_table', exportOptions: { columns: [$('thead th:not(.noexport):not(:empty)')] }, text: '<i class="fa fa-refresh"></i>' },
@@ -150,13 +151,13 @@
                                                                                 </div>
                                                                                     </div>`
                             },
-                            name: "co"
+                            name: "Id"
                         },
                         
 
                         {
                             data: "Title",
-                            name: "co",
+                            name: "Title",
                             searchable: true,
                             title: "Name",
 
@@ -175,20 +176,20 @@
                                 else
                                     return null;
                             },
-                            name: "co"
+                            name: "Image"
                         },
 
 
                         {
                             data: "DisplayOrder",
                             searchable: false,
-                            name: "eq",
+                            name: "DisplayOrder",
                             title: "Display Order",
                         },
                         {
                             data: "Hidden",
                             searchable: false,
-                            name: "eq",
+                            name: "Hidden",
                             title: "Hidden",
                             render: function (data, type, row)
                             {
@@ -202,14 +203,20 @@
                         {
                             data: "CreatedOnUtc",
                             searchable: false,
-                            name: "eq",
-                            title: "Created At",
+                            name: "CreatedOnUtc",
+                                title: "Created At",
+                                render: function (data) {
+                                return data ? data.split('.')[0] : "";
+        }
                         },
                         {
                             data: "UpdatedOnUtc",
                             searchable: false,
-                            name: "eq",
-                            title: "Updated At",
+                            name: "UpdatedOnUtc",
+                                title: "Updated At",
+                                render: function (data) {
+                                return data ? data.split('.')[0] : "";
+        }
                         },
 
                     ]

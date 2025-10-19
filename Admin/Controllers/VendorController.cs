@@ -32,7 +32,7 @@ namespace Admin.Controllers
             _unitofWork = unitofWork;
         }
 
-        // GET: CityController
+        // GET: VendorController
         public async Task<ActionResult> Index()
         {
             return View(new VendorDataTable());
@@ -81,14 +81,14 @@ namespace Admin.Controllers
         }
 
 
-        // GET: CityController/Create
+        // GET: VendorController
         public async Task<ActionResult> Create()
         {
 
             return View();
         }
 
-        // POST: CityController/Create
+        // POST: VendorController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(VendorVM masterVM)
@@ -128,7 +128,7 @@ namespace Admin.Controllers
 
         }
 
-        // GET: CityController/Edit/5
+        // GET: VendorController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
             if (id == 0)
@@ -146,7 +146,7 @@ namespace Admin.Controllers
             return View(result2);
         }
 
-        // POST: CityController/Edit/5
+        // POST: VendorController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, VendorVM master)

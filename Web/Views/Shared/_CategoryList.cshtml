@@ -11,48 +11,13 @@
 {
     <div class="col-lg-12 col-md-6">
         <h2 class="title-down-internal">CATEGORY</h2>
-      @*  <div class="category-list wow fadeInLeft" data-wow-delay=".5s">
-            <ul class="list-unstyled mt-10">
-                @foreach (var item in user.Where(e => !e.Hidden)) // Assuming GetAllVendors() returns a list of vendors
-                {
-
-                    @if (item.ParentCategory == null && item.Subcategories != null && item.Subcategories.Any())
-                    {
-                        <li class=""> <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id"> <strong>Parent Category: </strong>  @item.Name</a> </li>
-
-
-                        @if (Model != null && user.Where(e => item.Id == e.ParentCategoryId) != null && user.Any(e => item.Id == e.ParentCategoryId))
-                        {
-                            @foreach (var items in user.Where(e => item.Id == e.ParentCategoryId))
-                            {
-
-                                <li class=""> <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@items.Id"> <strong>Sub Category: </strong>  @items.Name</a> </li>
-
-
-                            }
-                        }
-
-
-
-                    }
-                    else
-                    {
-                        @if (item.ParentCategory == null && item.Subcategories == null)
-                        {
-                            <li class=""> <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id">@item.Name</a> </li>
-                        }
-                    }
-
-                }
-
-            </ul>
-        </div>*@
+     
 
 
         <nav class="mt-2 momo">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                @foreach (var item in user.Where(e => !e.Hidden)) // Assuming GetAllVendors() returns a list of vendors
+                @foreach (var item in user.Where(e => !e.Hidden)) 
                 {
 
                     @if (item.ParentCategory == null && item.Subcategories != null && item.Subcategories.Any())
@@ -61,10 +26,8 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-angle-left right"></i>
-
+                                <i class="fas fa-angle-left right mt-2"></i>
                                 <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id">   @item.Name</a>
-                                  
                             </a>
                             
                             @if (Model != null && user.Where(e => item.Id == e.ParentCategoryId) != null && user.Any(e => item.Id == e.ParentCategoryId))
@@ -82,6 +45,8 @@
                                     </ul>
                                 }
                             }
+                            <hr />
+
                         </li>
                     }
                     else
@@ -102,43 +67,4 @@
 
 
 
-@*<nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                  @foreach (var item in user.Where(e => !e.Hidden)) // Assuming GetAllVendors() returns a list of vendors
-                {
-
-            @if (item.ParentCategory == null && item.Subcategories != null && item.Subcategories.Any())
-            {
-
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                        <i class="fas fa-angle-left right"></i>
-                  
-                       <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@item.Id">   @item.Name</a> 
-               
-            </a>
-                    @if (Model != null && user.Where(e => item.Id == e.ParentCategoryId) != null && user.Any(e => item.Id == e.ParentCategoryId))
-                    {
-                        @foreach (var items in user.Where(e => item.Id == e.ParentCategoryId))
-                        {
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a asp-controller="Home" asp-action="ViewProduct" asp-route-itemId="@items.Id" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>@items.Name</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        }
-                    }
-        </li>
-
-        }
-
-        }
-
-    </ul>
-</nav>*@
